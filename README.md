@@ -1,8 +1,8 @@
 # C^2RV-CBCT
-Yiqun Lin, Jiewen Yang, Hualiang Wang, Xinpeng Ding, Wei Zhao, and Xiaomeng Li. "C^2RV: Cross-Regional and Cross-View Learning for Sparse-View CBCT Reconstruction." CVPR 2024. [arxiv](https://arxiv.org/abs/2406.03902)
+Yiqun Lin, Jiewen Yang, Hualiang Wang, Xinpeng Ding, Wei Zhao, and Xiaomeng Li. "C^2RV: Cross-Regional and Cross-View Learning for Sparse-View CBCT Reconstruction." CVPR 2024. [arXiv](https://arxiv.org/abs/2406.03902)
 
 ```
-@InProceedings{Lin_2024_CVPR,
+@InProceedings{lin2024c2rv,
     author    = {Lin, Yiqun and Yang, Jiewen and Wang, Hualiang and Ding, Xinpeng and Zhao, Wei and Li, Xiaomeng},
     title     = {C{\textasciicircum}2RV: Cross-Regional and Cross-View Learning for Sparse-View CBCT Reconstruction},
     booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
