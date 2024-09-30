@@ -5,19 +5,21 @@ import matplotlib.pyplot as plt
 
 
 def visualize_projections(path, projections, angles, figs_per_row=10):
-    n_row = len(projections) // figs_per_row
+    n_row = (len(projections) + figs_per_row - 1) // figs_per_row
     projections = projections.copy()
     projections = (projections - projections.min()) / (projections.max() - projections.min())
-
+    
     for i in range(len(projections)):
         angle = int((angles[i] / np.pi) * 180)
         plt.subplot(n_row, figs_per_row, i + 1)
-        plt.imshow(projections[i] * 255, cmap='gray', vmin=0, vmax=255)
-        plt.title(f'{angle}')
+        plt.imshow(projections[i], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'{angle}°')
         plt.axis('off')
-
+    
     plt.tight_layout(pad=0.3)
-    plt.savefig(path, dpi=500)
+    plt.savefig(path, dpi=300)
+    plt.close()
+
 
 
 class ConeGeometry_special(tigre.utilities.geometry.Geometry):
