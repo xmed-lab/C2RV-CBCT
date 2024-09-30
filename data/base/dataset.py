@@ -47,6 +47,7 @@ class Dataset:
         self._return_raw = False
         self._projector = None
     
+    
     def filter_names(self, names):
         """
         Filter the dataset to include only data items with names in the provided list.
@@ -65,6 +66,7 @@ class Dataset:
         
         return self
     
+    
     def return_raw(self, flag):
         """
         Set whether to return raw data without processing.
@@ -79,6 +81,7 @@ class Dataset:
         
         return self
     
+    
     def init_projector(self, projector):
         """
         Initialize a projector to simulate 2D projections for all data items.
@@ -92,6 +95,7 @@ class Dataset:
         self._projector = projector
         
         return self
+    
     
     def _generate_blocks(self):
         """
@@ -133,6 +137,7 @@ class Dataset:
         
         return self._block_info
     
+    
     def _convert_blocks(self, data):
         """
         Split the image data into blocks and add block information to the data dictionary.
@@ -154,6 +159,7 @@ class Dataset:
         
         return data
     
+    
     def _process(self, data):
         """
         Process the raw data through resampling, cropping/padding, and normalization.
@@ -170,6 +176,7 @@ class Dataset:
                 self._resample(data)
             )
         )
+    
     
     def _resample(self, data):
         """
@@ -191,6 +198,7 @@ class Dataset:
         # Update spacing to the desired spacing
         data['spacing'] = deepcopy(self._spacing)
         return data
+    
     
     def _crop_pad(self, data):
         """
@@ -271,6 +279,7 @@ class Dataset:
         
         return data
     
+    
     def _normalize(self, data):
         """
         Normalize the image data to the [0, 1] range based on the specified value range.
@@ -291,6 +300,7 @@ class Dataset:
         
         return data
     
+    
     def _load_raw(self, data):
         """
         Load raw image data using SimpleITK.
@@ -309,6 +319,7 @@ class Dataset:
             'spacing': spacing
         }
     
+    
     def __len__(self):
         """
         Get the number of data items in the dataset.
@@ -317,6 +328,7 @@ class Dataset:
             int: Length of the dataset.
         """
         return len(self._data_list)
+    
     
     def __getitem__(self, index):
         """

@@ -46,6 +46,7 @@ class Saver:
         self._projs_max = 0.0
         self._is_blocks_coords_saved = False
     
+    
     @property
     def path_dict(self):
         """
@@ -56,6 +57,7 @@ class Saver:
         """
         
         return self._path_dict
+    
     
     def _save_CT(self, data):
         """
@@ -71,6 +73,7 @@ class Saver:
             spacing=data['spacing'],
             uint8=True  # Save as uint8 image
         )
+    
     
     def _save_blocks(self, data):
         """
@@ -88,6 +91,7 @@ class Saver:
             save_path = self._path_dict['blocks_vals'].format(data['name'], i)
             block = (block * 255).astype(np.uint8)  # Scale block values to [0, 255]
             np.save(save_path, block)
+    
     
     def _save_projs(self, data, projs_vis=True):
         """
@@ -117,6 +121,7 @@ class Saver:
                 projs_scaled,
                 data['angles']
             )
+    
     
     def save(self, data):
         """

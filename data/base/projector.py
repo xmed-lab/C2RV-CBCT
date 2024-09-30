@@ -40,10 +40,10 @@ def visualize_projections(path, projections, angles, figs_per_row=10):
 class ConeGeometry_special(tigre.utilities.geometry.Geometry):
     """
     Custom geometry class for TIGRE to define a cone-beam CT scanner.
-
+    
     This class sets up the scanner geometry based on the provided configuration.
     """
-
+    
     def __init__(self, config):
         """
         Initialize the geometry with the given configuration.
@@ -107,13 +107,14 @@ class Projector:
             endpoint=False
         )
     
+    
     def __call__(self, image):
         """
         Simulate 2D projections of the given 3D image.
         
         Args:
             image (np.ndarray): 3D image array [x, y, z].
-
+        
         Returns:
             dict: Dictionary containing 'projs' (projections) and 'angles'.
         """
