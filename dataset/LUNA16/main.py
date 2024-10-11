@@ -1,14 +1,16 @@
 import os
+import sys
 import yaml
 import json
 import argparse
 from tqdm import tqdm
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from dataset import Dataset_LUNA16
 from base.utils import sitk_save
 from base.projector import Projector
 from base.saver import Saver, PATH_DICT
-
 
 
 class Saver_LUNA16(Saver):
@@ -58,11 +60,14 @@ class Saver_LUNA16(Saver):
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description='Process LUNA16 dataset')
+    
     parser.add_argument('-n', '--name', type=str, default=None, help='Name of a specific patient to process')
+    parser.add_argument('-r', '--root_dir', type=str, default='./', help='Root Directory')
+    parser.add_argument('-d', '--data_dir', type=str, default='raw', help='Name of directory with subsets of Luna')
     
     args = parser.parse_args()
     
-    root_dir = './'
+    root_dir = args.root_dir
     
     processed_dir = os.path.join(root_dir, 'processed/')
     config_path = os.path.join(root_dir, 'config.yaml')
@@ -78,7 +83,8 @@ if __name__ == '__main__':
     
     dataset = Dataset_LUNA16(
         root_dir=root_dir,
-        config=config['dataset']
+        config=config['dataset'],
+        data_dir= args.data_dir
     ).return_nodule_mask(True).init_projector(
         Projector(config=config['projector'])
     )

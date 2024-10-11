@@ -1,0 +1,10 @@
+matplotlib
+numpy
+PyYAML
+scipy
+SimpleITK
+torch
+tqdm
+cython
+easydict
+scikit-image
