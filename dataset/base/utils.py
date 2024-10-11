@@ -2,34 +2,63 @@ import numpy as np
 import SimpleITK as sitk
 
 
-
 def sitk_load(path, uint8=False, spacing_unit='mm'):
-    # load as float32
+    """
+    Load a medical image using SimpleITK.
+    
+    Args:
+        path (str): Path to the image file.
+        uint8 (bool): If True, scales image to [0, 1] assuming it's uint8.
+        spacing_unit (str): Unit of spacing, 'mm' or 'm'.
+    
+    Returns:
+        tuple: (image array [x, y, z], spacing array [x, y, z])
+    """
     itk_img = sitk.ReadImage(path)
     spacing = np.array(itk_img.GetSpacing(), dtype=np.float32)
+    
+    # Convert spacing to the desired unit
     if spacing_unit == 'm':
-        spacing *= 1000.
+        spacing *= 1000.0
     elif spacing_unit != 'mm':
-        raise ValueError
+        raise ValueError("Invalid spacing unit. Must be 'mm' or 'm'.")
+    
+    # Get the image array and transpose to [x, y, z]
     image = sitk.GetArrayFromImage(itk_img)
-    image = image.transpose(2, 1, 0) # to [x, y, z]
+    image = image.transpose(2, 1, 0)
     image = image.astype(np.float32)
+    
     if uint8:
-        # if data is saved as uint8, [0, 255] => [0, 1]
-        image /= 255.
+        # If the image is uint8, normalize to [0, 1]
+        image /= 255.0
+    
     return image, spacing
 
 
 def sitk_save(path, image, spacing=None, uint8=False):
-    # default: float32 (input)
+    """
+    Save an image array as a medical image file using SimpleITK.
+    
+    Args:
+        path (str): Path to save the image file.
+        image (np.ndarray): Image array [x, y, z].
+        spacing (np.ndarray or None): Spacing array [x, y, z] in mm.
+        uint8 (bool): If True, scales image to [0, 255] and saves as uint8.
+    """
     image = image.astype(np.float32)
+    # Transpose image back to [z, y, x] for SimpleITK
     image = image.transpose(2, 1, 0)
+    
     if uint8:
-        # value range should be [0, 1]
+        # Scale image to [0, 255] and convert to uint8
         image = (image * 255).astype(np.uint8)
+    
     out = sitk.GetImageFromArray(image)
+    
     if spacing is not None:
-        out.SetSpacing(spacing.astype(np.float64)) # unit: mm
+        # Set the image spacing (in mm)
+        out.SetSpacing(spacing.astype(np.float64))
+    
     sitk.WriteImage(out, path)
 
 
@@ -51,3 +80,4 @@ def check_range(dataset):
     size_max = np.max(size_list, axis=0)
     # TODO: histgram
     return size_min, size_max
+#cloner174

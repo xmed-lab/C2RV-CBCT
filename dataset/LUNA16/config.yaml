@@ -1,0 +1,35 @@
+dataset:
+  spacing: [1.6, 1.6, 1.6]    # Desired voxel spacing [x, y, z] in mm
+  value_range: [-1000, 1024]  # Hounsfield Unit (HU) value range for normalization
+  resolution: [256, 256, 256] # Desired image resolution [x, y, z]
+  block_size: [64, 64, 64]    # Block size for splitting images [x, y, z]
+
+projector:
+  n_porjections: 50           # Number of projection angles
+
+  # System configuration
+  DSD: 1200                   # Distance from source to detector (mm)
+  DSO: 800                    # Distance from source to origin (mm)
+
+  # Detector parameters
+  nDetector: [256, 256]       # Number of detector pixels [u, v]
+  dDetector: [2.4, 2.4]       # Size of each detector pixel (mm)
+
+  # Image parameters
+  nVoxel: [256, 256, 256]     # Number of voxels [x, y, z]
+  dVoxel: [1.6, 1.6, 1.6]     # Size of each voxel (mm)
+
+  # Offsets
+  offOrigin: [0, 0, 0]        # Image offset from origin (mm) [x, y, z]
+  offDetector: [0, 0]         # Detector offset (mm) [u, v]
+
+  # Auxiliary parameters
+  accuracy: 0.5               # Accuracy of forward projection (voxels per sample)
+
+  # Mode and filter
+  mode: cone                  # X-ray source mode ('parallel' or 'cone')
+  filter: null                # Filter type (e.g., 'ram-lak', 'shepp-logan')
+
+  # Angles
+  total_angle: 180            # Total rotation angle (degrees)
+  start_angle: 0              # Start angle (degrees)
