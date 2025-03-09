@@ -56,7 +56,7 @@ class Saver:
     def _save_projs(self, data, projs_vis=True):
         projs = data['projs']
         projs_max = projs.max()
-        projs_max = np.ceil(projs_max * 100) / 100
+        # projs_max = np.ceil(projs_max * 100) / 100
 
         projs = (projs / projs_max * 255).astype(np.uint8)
         with open(self._path_dict['projs'].format(data['name']), 'wb') as f:
