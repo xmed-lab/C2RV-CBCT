@@ -18,6 +18,7 @@ def visualize_projections(path, projections, angles, figs_per_row=10):
 
     plt.tight_layout(pad=0.3)
     plt.savefig(path, dpi=500)
+    plt.close()
 
 
 class ConeGeometry_special(tigre.utilities.geometry.Geometry):
